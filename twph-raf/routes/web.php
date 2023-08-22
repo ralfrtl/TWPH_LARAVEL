@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/greet', function () {
-    return view('Greet', ['name' => 'raf']);
+Route::get('/greet/{name?}', function (string $name = 'raf') {
+//    return view('Greet');
+    return 'test: ' . $name;
 });
