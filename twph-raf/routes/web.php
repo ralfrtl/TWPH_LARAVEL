@@ -21,3 +21,9 @@ Route::get('/greet/{name?}', function (string $name = 'raf') {
 //    return view('Greet');
     return 'test: ' . $name;
 });
+
+Route::get('/news/{year}/{month?}', function (string $year, string $month = '') {
+//    return view('Greet');
+    return 'Year : ' . $year . (!empty($month) ? '<br>Month : ' . $month : '');
+});
+
