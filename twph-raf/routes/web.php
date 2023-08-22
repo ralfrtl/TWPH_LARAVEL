@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\newsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,8 +24,11 @@ Route::get('/greet/{name?}', function (string $name = 'raf') {
     return 'test: ' . $name;
 });
 
-Route::get('/news/{year}/{month?}', function (string $year, string $month = '') {
-//    return view('Greet');
-    return 'Year : ' . $year . (!empty($month) ? '<br>Month : ' . $month : '');
-});
+//Route::get('/news/{year}/{month?}', function (int $year, int $month = 0) {
+////    return view('Greet');
+//    return 'Year : ' . $year . (!empty($month) ? '<br>Month : ' . $month : '');
+//});
 
+Route::controller(newsController::class)->group(function (){
+    Route::get('/news/{year}/{month?}', 'index');
+});
