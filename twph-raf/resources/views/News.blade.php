@@ -1,3 +1,1 @@
-
-<p>Year {{$year}}</p>
-<p>Month {{$month}}</p>
+News for {{$month}}, {{$year}}

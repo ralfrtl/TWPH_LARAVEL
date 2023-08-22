@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 
 class newsController extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
+        if ($this->isValidMonth($request->month)) {
+            $this->month = date("F", mktime(0, 0, 0, $request->month, 1));
+        } else {
+            $this->month = 'Invalid month';
+        }
     }
 
     public function index($year, $month = null)
@@ -15,15 +20,15 @@ class newsController extends Controller
         if ($this->isValidMonth($month)) {
             return view('News', [
                 'year' => $year,
-                'month' => $month
+                'month' => $this->month
             ]);
         } else {
-            return 'Month not valid';
+            return view('invalidMonth');
         }
     }
 
-    public function isValidMonth(string $month)
+    public function isValidMonth(string $month): bool
     {
-        return $month > 0 and $month <= 12;
+        return $month >= 1 and $month <= 12;
     }
 }
