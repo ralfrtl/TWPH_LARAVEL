@@ -1,1 +1,0 @@
-News for {{$month}}, {{$year}}
