@@ -18,8 +18,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['login' => false, 'register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home')
-    ->middleware([\App\Http\Middleware\CheckUserLevel::class]);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', function () {
+        return view('home');
+    });
+    Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm');
+    Route::post('register', 'App\Http\Controllers\Auth\RegisterController@create')
+        ->name('register');
+});
+
+Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
+Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')
+    ->name('login');
+
