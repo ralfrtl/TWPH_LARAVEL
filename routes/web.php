@@ -24,7 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', function () {
         return view('home');
     });
-    Route::get('register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm');
+    Route::get('register', 'App\Http\Controllers\Auth\RegisterController@index')
+        ->middleware('must_admin');
     Route::post('register', 'App\Http\Controllers\Auth\RegisterController@create')
         ->name('register');
 });

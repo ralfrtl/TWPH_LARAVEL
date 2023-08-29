@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\CheckUserLevel;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -40,16 +39,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('guest');
-        $this->middleware('App\Http\Middleware\CheckUserLevel');
+        $this->middleware('must_admin');
     }
 
-    public function showRegistrationForm(Request $request)
-    {
-        if ($request->role == 'ADMIN')
-            return view('auth/register');
-        else
-            return view('errors/NotPermitted');
+    public function index() {
+        return view('auth/register');
     }
 
     /**
