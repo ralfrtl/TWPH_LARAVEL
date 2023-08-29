@@ -23,8 +23,11 @@
             <a class="navbar-brand" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
-            <a class="nav-link" href="{{ url('/register') }}">
+            <a class="nav-link px-2" href="{{ url('/register') }}">
                 {{ __('Create account') }}
+            </a>
+            <a class="nav-link px-2" href="{{ url('/userlist') }}">
+                {{ __('User List') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

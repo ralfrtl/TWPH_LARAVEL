@@ -16,7 +16,8 @@ class MustAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->user_level >= 1 and Auth::user()->user_level <= 4) {
+        $level = Auth::user()->user_level ?? 0;
+        if ($level >= 1 and $level <= 4) {
             return $next($request);
         }
         return back()->withInput();

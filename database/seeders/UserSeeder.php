@@ -20,10 +20,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('asdf1234')
         ]);
         DB::table('employee')->insert([
-            'user_id' => DB::getPdo()->lastInsertId(),
+            'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Rafie',
-            'middle_initial' => 'T',
+            'middle_name' => 'T',
             'last_name' => 'Luartes',
+            'date_of_birth' => '1998-06-22',
             'salary' => '9000'
         ]);
 
@@ -33,10 +34,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('sin6in6i$myTaLent')
         ]);
         DB::table('employee')->insert([
-            'user_id' => DB::getPdo()->lastInsertId(),
+            'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Jane',
-            'middle_initial' => 'A',
+            'middle_name' => 'A',
             'last_name' => 'Song',
+            'date_of_birth' => fake()->date,
             'salary' => '15000'
         ]);
 
@@ -46,10 +48,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('vinc3v1c3$')
         ]);
         DB::table('employee')->insert([
-            'user_id' => DB::getPdo()->lastInsertId(),
+            'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Vincent',
-            'middle_initial' => 'H',
+            'middle_name' => 'H',
             'last_name' => 'Viceral',
+            'date_of_birth' => fake()->date,
             'salary' => '25000'
         ]);
 
@@ -59,10 +62,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('StackLangNangStack!_000')
         ]);
         DB::table('employee')->insert([
-            'user_id' => DB::getPdo()->lastInsertId(),
+            'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Aldous',
-            'middle_initial' => 'B',
+            'middle_name' => 'B',
             'last_name' => 'Recharge',
+            'date_of_birth' => fake()->date,
             'salary' => '50000'
         ]);
 
@@ -72,10 +76,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('DrakeIsBetterThanMe_100')
         ]);
         DB::table('employee')->insert([
-            'user_id' => DB::getPdo()->lastInsertId(),
+            'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'John',
-            'middle_initial' => 'R',
+            'middle_name' => 'R',
             'last_name' => 'Fausto',
+            'date_of_birth' => fake()->date,
             'salary' => '20000'
         ]);
     }
