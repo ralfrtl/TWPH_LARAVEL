@@ -8,13 +8,24 @@
                 <tr>
                     <th class="bg-success text-white" scope="col">ID</th>
                     <th class="bg-success text-white" scope="col">Full Name</th>
+                    <th class="bg-success text-white" scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($users as $user)
-                    <tr style="cursor: pointer" onclick="window.location='/userview/{{$user->id}}'">
-                        <td class="bg-white">{{$user->id}}</td>
-                        <td class="bg-white">{{$user->last_name}} {{$user->first_name}}, {{$user->middle_name}}</td>
+                    <tr class="bg-white" style="cursor: pointer" onclick="window.location='/userview/{{$user->id}}'">
+                        <td class="col-1">{{$user->id}}</td>
+                        <td class="col-7">{{$user->last_name}} {{$user->first_name}}, {{$user->middle_name}}</td>
+                        <td class="col-2">
+                            <div class="float-end">
+                                <a class="btn btn-sm btn-outline-primary rounded-5" href="register/edit/{{$user->id}}">
+                                    Edit
+                                </a>
+                                <a class="btn btn-sm btn-outline-danger rounded-5" href="register/delete">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

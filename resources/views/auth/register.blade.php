@@ -5,10 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-lg">
-                    <h3 class="mt-5 mx-auto">{{ __('Register') }}</h3>
+                    <h3 class="mt-5 mx-auto">{{ __((empty($id) ? 'Register' : 'Edit employee info')) }}</h3>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        @if(empty($id))
+                            <form method="POST" action="{{ route('register.create') }}">
+                        @else
+                            <form method="PUT" action="{{ route('register.edit') }}">
+                        @endif
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-4">
@@ -21,11 +25,10 @@
                             <div class="row mb-3">
                                 <label for="email"
                                        class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ old('email') }}" required autocomplete="email">
+                                           value="{{ $email }}" required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -69,7 +72,7 @@
                                 <div class="col-md-6">
                                     <input id="user_level" type="number"
                                            class="form-control @error('user_level') is-invalid @enderror"
-                                           name="user_level" value="{{ old('user_level') }}" min="1" max="6" required
+                                           name="user_level" value="{{ $user_level }}" min="1" max="6" required
                                            autocomplete="user_level">
 
                                     @error('user_level')
@@ -97,13 +100,13 @@
                                 <div class="col-md-6">
                                     <input id="first_name" type="text"
                                            class="form-control @error('first_name') is-invalid @enderror"
-                                           name="first_name" value="{{ old('first_name') }}" required
+                                           name="first_name" value="{{ $first_name }}" required
                                            autocomplete="first_name" autofocus>
 
                                     @error('first_name')
                                     <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -115,13 +118,13 @@
                                 <div class="col-md-6">
                                     <input id="middle_name" type="text"
                                            class="form-control @error('middle_name') is-invalid @enderror"
-                                           name="middle_name" value="{{ old('middle_name') }}" required
+                                           name="middle_name" value="{{ $middle_name }}" required
                                            autocomplete="middle_name" autofocus>
 
                                     @error('middle_name')
                                     <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -133,13 +136,13 @@
                                 <div class="col-md-6">
                                     <input id="last_name" type="text"
                                            class="form-control @error('last_name') is-invalid @enderror"
-                                           name="last_name" value="{{ old('last_name') }}" required
+                                           name="last_name" value="{{ $last_name }}" required
                                            autocomplete="last_name" autofocus>
 
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -149,27 +152,27 @@
                                        class="col-md-4 col-form-label text-md-end">{{ __('Birthday') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="birthday" type="date"
-                                           class="form-control @error('birthday') is-invalid @enderror"
-                                           name="birthday" value="{{ old('birthday') }}" required
-                                           autocomplete="birthday">
+                                    <input id="date_of_birth" type="date"
+                                           class="form-control @error('date_of_birth') is-invalid @enderror"
+                                           name="date_of_birth" value="{{ $date_of_birth }}" required
+                                           autocomplete="date_of_birth">
 
-                                    @error('birthday')
+                                    @error('date_of_birth')
                                     <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="salary"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('Salary') }}</label>
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Salary ') . env('LOCAL_CURRENCY') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="salary" type="number"
                                            class="form-control @error('salary') is-invalid @enderror"
-                                           name="salary" value="{{ old('salary') }}" min="1" max="1000000" required
+                                           name="salary" value="{{ $salary }}" min="1" max="1000000" required
                                            autocomplete="salary">
 
                                     @error('salary')

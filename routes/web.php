@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\User\UserListController;
 use App\Http\Controllers\User\UserViewController;
 use Illuminate\Support\Facades\Auth;
@@ -25,17 +25,23 @@ Route::get('/', function () {
 Auth::routes(['login' => false, 'register' => false]);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', function () {
+    Route::get('home', function () {
         return view('home');
     });
 
     Route::group(['middleware' => ['must_admin']], function () {
-        Route::get('/userlist', [UserListController::class, 'index']);
-        Route::get('/userview/{id?}', [UserViewController::class, 'index']);
+        Route::get('userlist', [UserListController::class, 'index']);
+        Route::get('userview/{id?}', [UserViewController::class, 'index']);
 
-        Route::get('/register', [RegisterController::class, 'index']);
-        Route::post('/register', [RegisterController::class, 'create'])
-            ->name('register');
+        Route::get('register', [EmployeeController::class, 'index']);
+        Route::post('register/create', [EmployeeController::class, 'store'])
+            ->name('register.create');
+
+        Route::get('register/edit/{id}', [EmployeeController::class, 'show']);
+        Route::put('register/edit', [EmployeeController::class, 'update'])
+            ->name('register.edit');
+
+        Route::get('register/show/{id}', [EmployeeController::class, 'show']);
     });
 });
 

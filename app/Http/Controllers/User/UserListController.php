@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,7 @@ class UserListController extends Controller
     {
 //        $users = User::join('employee', 'users.id', '=', 'employee.id')
 //            ->get(['users.*', 'employee.*']);
-        $users = DB::table('employee')->get();
+        $users = Employee::all();
         return view('user/userList' , compact('users'));
     }
 }
