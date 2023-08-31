@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,12 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        User::create([
             'email' => 'rafie.luartes.twph@gmail.com',
             'user_level' => '1',
             'password' => Hash::make('asdf1234')
         ]);
-        DB::table('employee')->insert([
+        Employee::create([
             'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Rafie',
             'middle_name' => 'T',
@@ -28,12 +30,12 @@ class UserSeeder extends Seeder
             'salary' => '9000'
         ]);
 
-        DB::table('users')->insert([
+        User::create([
             'email' => 'songjane@exmail.co',
             'user_level' => '3',
             'password' => Hash::make('sin6in6i$myTaLent')
         ]);
-        DB::table('employee')->insert([
+        Employee::create([
             'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Jane',
             'middle_name' => 'A',
@@ -42,12 +44,12 @@ class UserSeeder extends Seeder
             'salary' => '15000'
         ]);
 
-        DB::table('users')->insert([
+        User::create([
             'email' => 'vincevice@exmail.co',
             'user_level' => '4',
             'password' => Hash::make('vinc3v1c3$')
         ]);
-        DB::table('employee')->insert([
+        Employee::create([
             'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Vincent',
             'middle_name' => 'H',
@@ -56,12 +58,12 @@ class UserSeeder extends Seeder
             'salary' => '25000'
         ]);
 
-        DB::table('users')->insert([
+        User::create([
             'email' => 'ald_rech@exmail.co',
             'user_level' => '5',
             'password' => Hash::make('StackLangNangStack!_000')
         ]);
-        DB::table('employee')->insert([
+        Employee::create([
             'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'Aldous',
             'middle_name' => 'B',
@@ -70,12 +72,12 @@ class UserSeeder extends Seeder
             'salary' => '50000'
         ]);
 
-        DB::table('users')->insert([
+        User::create([
             'email' => '25ccc@exmail.co',
             'user_level' => '6',
             'password' => Hash::make('DrakeIsBetterThanMe_100')
         ]);
-        DB::table('employee')->insert([
+        Employee::create([
             'id' => DB::getPdo()->lastInsertId(),
             'first_name' => 'John',
             'middle_name' => 'R',

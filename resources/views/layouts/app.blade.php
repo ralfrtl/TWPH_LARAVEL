@@ -23,10 +23,10 @@
             <a class="navbar-brand" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
-            <a class="nav-link px-2" href="{{ url('/register') }}">
+            <a class="nav-link px-2" href="{{ route('user.create') }}">
                 {{ __('Create account') }}
             </a>
-            <a class="nav-link px-2" href="{{ url('/userlist') }}">
+            <a class="nav-link px-2" href="{{ route('user.index') }}">
                 {{ __('User List') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,7 +53,7 @@
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('user.create') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
