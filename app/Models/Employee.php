@@ -9,6 +9,14 @@ class Employee extends Model
 {
     use HasFactory;
 
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'employee';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +28,6 @@ class Employee extends Model
         'middle_name',
         'last_name',
         'date_of_birth',
-        'salary'
+        'salary',
     ];
 }

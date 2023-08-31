@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\User\UserListController;
+use App\Http\Controllers\User\UserViewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,17 +29,17 @@ Route::group(['middleware' => ['auth']], function () {
         return view('home');
     });
 
-    Route::get('/userlist', [\App\Http\Controllers\User\UserListController::class, 'index']);
-    Route::get('/userview/{id?}', [\App\Http\Controllers\User\UserViewController::class, 'index']);
+    Route::group(['middleware' => ['must_admin']], function () {
+        Route::get('/userlist', [UserListController::class, 'index']);
+        Route::get('/userview/{id?}', [UserViewController::class, 'index']);
+
+        Route::get('/register', [RegisterController::class, 'index']);
+        Route::post('/register', [RegisterController::class, 'create'])
+            ->name('register');
+    });
 });
 
-Route::group(['middleware' => ['must_admin']], function () {
-    Route::get('register', 'App\Http\Controllers\Auth\RegisterController@index');
-    Route::post('register', 'App\Http\Controllers\Auth\RegisterController@create')
-        ->name('register');
-});
-
-Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
-Route::post('login', 'App\Http\Controllers\Auth\LoginController@login')
+Route::get('login', [LoginController::class,'showLoginForm']);
+Route::post('login', [LoginController::class,'login'])
     ->name('login');
 

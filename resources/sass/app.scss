@@ -6,3 +6,13 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+.bg-gradient-success {
+    background: rgb(25,135,84);
+    background: linear-gradient(142deg, rgba(22,255,0,1) 0%, rgb(25,135,84) 50%);
+}
+
+.bg-gradient-warning {
+    background: rgb(252, 156, 156);
+    background: linear-gradient(142deg, rgb(252, 156, 156) 0%, rgba(130,0,0,1) 79%);
+}
