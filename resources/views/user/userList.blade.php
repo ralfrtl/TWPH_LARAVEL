@@ -27,18 +27,25 @@
                         <td class="col-2 align-middle text-center px-4">
                                 {{$user->id}}
                         </td>
-                        <td class="col-8 align-middle">
+                        <td class="col-7 align-middle">
                                 {{$user->last_name}} {{$user->first_name}}, {{$user->middle_name}}
                         </td>
-                        <td class="col-2 align-middle">
-                            <div class="">
-                                <a class="btn btn-sm btn-outline-primary rounded-5" href="{{ route('user.edit', ['id' => $user->id]) }}">
-                                    Edit
-                                </a>
-                                <a class="btn btn-sm btn-outline-danger rounded-5" href="{{ route('user.destroy', ['id' => $user->id]) }}">
-                                    Delete
-                                </a>
-                            </div>
+                        <td class="col-3 align-middle">
+                            <a class="btn btn-sm btn-outline-primary rounded-5" href="{{ route('user.edit', ['id' => $user->id]) }}">
+                                <i class="bi bi-pencil-square"></i>
+                                Edit
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger rounded-5" href="{{ route('user.destroy', ['id' => $user->id]) }}"
+                                onclick="showConfirmDialog(event)">
+                                <i class="bi bi-person-dash-fill"></i>
+                                Delete
+                            </a>
+                            <script>
+                                function showConfirmDialog(e){
+                                    e.stopPropagation()
+                                    return confirm('You sure you want to delete this')
+                                }
+                            </script>
                         </td>
                     </tr>
                 @endforeach
@@ -47,3 +54,4 @@
         </div>
     </div>
 @endsection
+

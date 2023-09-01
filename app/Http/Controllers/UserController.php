@@ -113,8 +113,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        User::find($id)->delete();
-        Employee::find($id)->delete();
+        dd(User::find($id));
+//        Employee::find($id)->delete();
         return redirect()->route('user.index');
     }
 }
