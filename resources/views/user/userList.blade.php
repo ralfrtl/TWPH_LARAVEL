@@ -1,23 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card bg-white w-50 mx-auto">
-        <div class="card-body shadow-lg">
+    <div class="card bg-white fw-750 mx-auto shadow-lg">
             <table class="table table-hover bg-warning table-borderless">
                 <thead class="bg-gradient-success" style="background-attachment: fixed">
                 <tr style="background-color: transparent">
-                    <th class="text-white" style="background-color: transparent" scope="col">ID</th>
-                    <th class="text-white" style="background-color: transparent" scope="col">Full Name</th>
-                    <th class="text-white" style="background-color: transparent" scope="col"></th>
+                    <th class="text-white p-3" style="background-color: transparent" scope="col">ID</th>
+                    <th class="text-white p-3" style="background-color: transparent" scope="col">Full Name</th>
+                    <th class="text-white p-3" style="background-color: transparent" scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($users as $user)
                     <tr class="bg-white" style="cursor: pointer" onclick="window.location='{{ route('user.show', ['id' => $user->id]) }}'">
-                        <td class="col-1">{{$user->id}}</td>
-                        <td class="col-7">{{$user->last_name}} {{$user->first_name}}, {{$user->middle_name}}</td>
+                        <td class="col-1">
+                            <span class="p-2">
+                                {{$user->id}}
+                            </span>
+                        </td>
+                        <td class="col-7">
+                            <span class="p-2">
+                                {{$user->last_name}} {{$user->first_name}}, {{$user->middle_name}}
+                            </span>
+                        </td>
                         <td class="col-2">
-                            <div class="float-end">
+                            <div class="float-end px-2">
                                 <a class="btn btn-sm btn-outline-primary rounded-5" href="{{ route('user.edit', ['id' => $user->id]) }}">
                                     Edit
                                 </a>
@@ -30,6 +37,5 @@
                 @endforeach
                 </tbody>
             </table>
-        </div>
     </div>
 @endsection

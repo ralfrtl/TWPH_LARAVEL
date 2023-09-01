@@ -3,7 +3,7 @@
 
 @section('content')
     @if(empty($user))
-        <div class="card w-50 mx-auto shadow-lg">
+        <div class="card fw-750 mx-auto shadow-lg">
             <div class="card-body bg-gradient-warning text-white">
                 <p class="text-center m-0">
                     No results found.
@@ -11,7 +11,7 @@
             </div>
         </div>
     @else
-        <div class="card w-50 mx-auto shadow-lg">
+        <div class="card fw-750 mx-auto shadow-lg">
             <div class="card-body bg-gradient-success text-white">
                 <p class="text-center m-0">
                     Record retrieved.
@@ -19,7 +19,7 @@
             </div>
         </div>
         <br>
-        <div class="w-50 mx-auto">
+        <div class="fw-750 mx-auto">
             <div class="card shadow-lg">
                 <div class="card-body bg-white">
                     <h6 class="text-success">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <br>
-            <a class="btn btn-primary rounded-5 float-right float-end" href="/userlist">Back</a>
+            <a class="btn btn-primary rounded-5 float-right float-end" href="/user">Back</a>
         </div>
     @endif
 @endsection
