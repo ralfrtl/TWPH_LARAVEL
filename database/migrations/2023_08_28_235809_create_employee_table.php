@@ -15,13 +15,15 @@ return new class extends Migration
             $table->unsignedBigInteger('id');
             $table->foreign('id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
             $table->date('date_of_birth');
             $table->decimal('salary', 15, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

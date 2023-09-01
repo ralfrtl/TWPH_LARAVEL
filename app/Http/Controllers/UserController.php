@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users = Employee::all();
-        return view('user/userList' , compact('users'));
+        return view('user/userList', compact('users'));
     }
 
     /**
@@ -33,13 +33,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
+        $user = User::create([
             'email' => $request->email,
             'user_level' => $request->user_level,
             'password' => Hash::make($request->password),
         ]);
         Employee::create([
-            'id' => DB::getPdo()->lastInsertId(),
+            'id' => $user->id,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
@@ -47,7 +47,9 @@ class UserController extends Controller
             'salary' => $request->salary,
         ]);
 
-        return view('user/userRegister', ['user_created' => true]);
+        return redirect()->route('user.create')
+            ->with('message', 'User ID#' . $user->id . ' created successfully.')
+            ->with('message-class', 'bg-gradient-success');
     }
 
     /**
@@ -59,8 +61,10 @@ class UserController extends Controller
             ->join('employee', 'users.id', '=', 'employee.id')
             ->get(['users.*', 'employee.*'])
             ->first();
-        if (!empty($user))
+        if (!empty($user)) {
             $user['age'] = Carbon::parse($user->date_of_birth)->age;
+            $user['date_of_birth'] = Carbon::create($user->date_of_birth)->toFormattedDateString();
+        }
         return view('user/userView' , compact('user'));
     }
 
@@ -87,7 +91,21 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request);
+        $user = User::find($id);
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->user_level = $request->user_level;
+        $user->save();
+        $employee = Employee::find($id);
+        $employee->first_name = $request->first_name;
+        $employee->middle_name = $request->middle_name;
+        $employee->last_name = $request->last_name;
+        $employee->date_of_birth = $request->date_of_birth;
+        $employee->salary = $request->salary;
+        $employee->save();
+        return redirect()->route('user.index')
+            ->with('message', 'User ID#' . $id . ' modified successfully.')
+            ->with('message-class', 'bg-gradient-success');
     }
 
     /**
@@ -95,6 +113,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::find($id)->delete();
+        Employee::find($id)->delete();
+        return redirect()->route('user.index');
     }
 }

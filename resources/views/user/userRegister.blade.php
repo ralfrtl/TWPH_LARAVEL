@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(!empty($user_created) and $user_created)
+    @if(session('message'))
         <div class="card fw-750 mx-auto shadow-lg">
-            <div class="card-body bg-gradient-success text-white">
+            <div class="card-body {{ session('message-class') }} text-white">
                 <p class="text-center m-0">
-                    Record saved.
+                    {{ session('message') }}
                 </p>
             </div>
         </div>
