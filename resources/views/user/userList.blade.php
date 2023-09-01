@@ -16,9 +16,14 @@
             <table class="table table-hover table-borderless m-0">
                 <thead class="bg-gradient-neutral" style="background-attachment: fixed">
                 <tr style="background-color: transparent">
-                    <th class="text-white text-center py-3 h3" style="background-color: transparent" scope="col">ID</th>
+                    <th class="text-white text-center py-3 h3" style="background-color: transparent; border-top-left-radius: 6px;" scope="col">ID</th>
                     <th class="text-white py-3 h3" style="background-color: transparent" scope="col">Full Name</th>
-                    <th class="text-white" style="background-color: transparent" scope="col"></th>
+                    <th class="text-white text-center align-middle" style="background-color: transparent; border-top-right-radius: 6px;" scope="col">
+                        <a class="btn btn btn-success rounded-5" href="{{ route('user.create') }}">
+                            <i class="bi bi-person-plus"></i>
+                            Add user account
+                        </a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,14 +35,14 @@
                         <td class="col-7 align-middle">
                                 {{$user->last_name}} {{$user->first_name}}, {{$user->middle_name}}
                         </td>
-                        <td class="col-3 align-middle">
+                        <td class="col-3 text-center align-middle">
                             <a class="btn btn-sm btn-outline-primary rounded-5" href="{{ route('user.edit', ['id' => $user->id]) }}">
                                 <i class="bi bi-pencil-square"></i>
                                 Edit
                             </a>
                             <a class="btn btn-sm btn-outline-danger rounded-5" href="{{ route('user.destroy', ['id' => $user->id]) }}"
                                 onclick="showConfirmDialog(event)">
-                                <i class="bi bi-person-dash-fill"></i>
+                                <i class="bi bi-person-dash"></i>
                                 Delete
                             </a>
                             <script>

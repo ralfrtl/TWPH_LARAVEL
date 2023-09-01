@@ -16,16 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['login' => false, 'user/create' => false]);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('home', function () {
+    Route::get('/', function () {
         return view('home');
-    });
+    })->name('home');
 
     Route::group(['middleware' => ['must_admin']], function () {
         Route::get('user/', [UserController::class, 'index'])->name('user.index');
