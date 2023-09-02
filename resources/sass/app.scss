@@ -11,13 +11,13 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 
 .bg-gradient-success {
-    background: rgb(25,135,84);
-    background: linear-gradient(142deg, rgba(22,255,0,1) 0%, rgb(25,135,84) 50%);
+    background: rgb(25, 135, 84);
+    background: linear-gradient(142deg, rgba(22, 255, 0, 1) 0%, rgb(25, 135, 84) 50%);
 }
 
 .bg-gradient-warning {
     background: rgb(252, 156, 156);
-    background: linear-gradient(142deg, rgb(252, 156, 156) 0%, rgba(130,0,0,1) 79%);
+    background: linear-gradient(142deg, rgb(252, 156, 156) 0%, rgba(130, 0, 0, 1) 79%);
 }
 
 .bg-gradient-neutral {
@@ -27,4 +27,64 @@
 
 .fw-750 {
     width: 750px;
+}
+
+.blurred-blue::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://cdn4.vectorstock.com/i/1000x1000/77/43/abstract-light-blue-watercolor-for-background-vector-35447743.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    z-index: -1;
+}
+
+.blurred-orange::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://png.pngtree.com/background/20210709/original/pngtree-orange-yellow-watercolor-wind-simple-fashion-background-picture-image_916128.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    z-index: -1;
+}
+
+.blurred-red::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.freepik.com/free-vector/abstract-soft-pink-watercolor-background_1035-18994.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    z-index: -1;
+}
+
+.blurred-green::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://media.istockphoto.com/id/1370056106/vector/watercolor-background-vector-texture-in-blue-and-green-distressed-painted-watercolor.jpg?s=612x612&w=0&k=20&c=vCE52wN50loTzj7oOkOw9fphGKVWRAk84PDDzFjAtB4=');
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    z-index: -1;
+}
+
+.blurred-blue, .blurred-orange, .blurred-red, .blurred-green {
+    z-index: 1;
 }

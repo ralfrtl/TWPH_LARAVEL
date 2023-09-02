@@ -2,16 +2,16 @@
 
 @section('content')
     @if(empty($user))
-        <div class="card fw-750 mx-auto shadow-lg">
-            <div class="card-body bg-gradient-warning text-white">
+        <div class="card fw-750 mx-auto shadow-lg blurred-red">
+            <div class="card-body">
                 <p class="text-center m-0">
                     No results found.
                 </p>
             </div>
         </div>
     @else
-        <div class="card fw-750 mx-auto shadow-lg">
-            <div class="card-body bg-gradient-success text-white">
+        <div class="card fw-750 mx-auto shadow-lg blurred-green">
+            <div class="card-body">
                 <p class="text-center m-0">
                     Record retrieved.
                 </p>

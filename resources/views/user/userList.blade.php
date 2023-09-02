@@ -12,13 +12,13 @@
     <br>
 @endif
     <div class="card bg-white fw-750 mx-auto shadow-lg">
-        <div class="card-body m-0 p-0">
+        <div class="card-body m-0 p-0  blurred-blue">
             <table class="table table-hover table-borderless m-0">
-                <thead class="bg-gradient-neutral" style="background-attachment: fixed">
-                <tr style="background-color: transparent">
-                    <th class="text-white text-center py-3 h3" style="background-color: transparent; border-top-left-radius: 6px;" scope="col">ID</th>
-                    <th class="text-white py-3 h3" style="background-color: transparent" scope="col">Full Name</th>
-                    <th class="text-white text-center align-middle" style="background-color: transparent; border-top-right-radius: 6px;" scope="col">
+                <thead>
+                <tr>
+                    <th class="text-center py-3 h3" style="background-color: rgba(0,0,0,.05); border-top-left-radius: 6px;" scope="col">ID</th>
+                    <th class="py-3 h3" style="background-color: rgba(0,0,0,.05)" scope="col">Full Name</th>
+                    <th class="text-center align-middle" style="background-color: rgba(0,0,0,.05); border-top-right-radius: 6px;" scope="col">
                         <a class="btn btn btn-success rounded-5" href="{{ route('user.create') }}">
                             <i class="bi bi-person-plus"></i>
                             Add user account

@@ -2,8 +2,8 @@
 
 @section('content')
     @if(session('message'))
-        <div class="card fw-750 mx-auto shadow-lg">
-            <div class="card-body {{ session('message-class') }} text-white">
+        <div class="card fw-750 mx-auto shadow-lg {{ session('message-class') }}">
+            <div class="card-body">
                 <p class="text-center m-0">
                     {{ session('message') }}
                 </p>
@@ -11,10 +11,12 @@
         </div>
         <br>
     @endif
-        <div class="card fw-750 mx-auto shadow-lg">
-            <h3 class="mt-5 mx-auto">{{ __((empty($id) ? 'Register' : 'Edit employee info')) }}</h3>
+        <div class="card fw-750 mx-auto blurred-orange shadow-lg">
+            <div class="card-title text-center">
+                <h2 class="my-4">{{ __((empty($id) ? 'Register' : 'Edit employee info')) }}</h2>
+            </div>
 
-            <div class="card-body">
+            <div class="card-body bg-white p-4">
                 @if(empty($id))
                     <form method="POST" action="{{ route('user.store') }}">
                 @else
@@ -22,7 +24,7 @@
                     @method('PUT')
                 @endif
                     @csrf
-                    <div class="row mb-3">
+                    <div class="row mt-3 mb-1">
                         <h5 class="col-md-4 text-end">
                             User credential
                         </h5>
@@ -91,12 +93,10 @@
 
                     <br>
 
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <h5 class="text-end">
-                                Employee information
-                            </h5>
-                        </div>
+                    <div class="row mt-3 mb-1">
+                        <h5 class="col-md-4 text-end">
+                            Employee information
+                        </h5>
                     </div>
 
                     <div class="row mb-3">
@@ -189,10 +189,13 @@
                         </div>
                     </div>
 
-                    <div class="row mx-4 float-end">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __(empty($id) ? 'Register' : 'Commit changes') }}
-                        </button>
+                    <div class="row">
+                        <div class="col-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary float-end rounded-5 my-3">
+                                {{ __(empty($id) ? 'Register' : 'Commit changes') }}
+                            </button>
+
+                        </div>
                     </div>
                 </form>
             </div>

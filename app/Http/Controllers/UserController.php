@@ -49,7 +49,7 @@ class UserController extends Controller
 
         return redirect()->route('user.create')
             ->with('message', 'User ID#' . $user->id . ' created successfully.')
-            ->with('message-class', 'bg-gradient-success');
+            ->with('message-class', 'blurred-green');
     }
 
     /**
