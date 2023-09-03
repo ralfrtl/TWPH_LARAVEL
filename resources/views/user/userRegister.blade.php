@@ -11,7 +11,7 @@
         </div>
         <br>
     @endif
-        <div class="card fw-750 mx-auto blurred-orange shadow-lg">
+        <div class="card fw-750 mx-auto blurred-tangerine shadow-lg">
             <div class="card-title text-center">
                 <h2 class="my-4">{{ __((empty($id) ? 'Register' : 'Edit employee info')) }}</h2>
             </div>

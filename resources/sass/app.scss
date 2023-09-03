@@ -50,7 +50,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://png.pngtree.com/background/20210709/original/pngtree-orange-yellow-watercolor-wind-simple-fashion-background-picture-image_916128.jpg');
+    background-image: url('https://img.freepik.com/free-vector/orange-watercolor-background_1116-200.jpg');
     background-size: cover;
     background-position: center;
     filter: blur(25px);
@@ -85,6 +85,20 @@
     z-index: -1;
 }
 
-.blurred-blue, .blurred-orange, .blurred-red, .blurred-green {
+.blurred-tangerine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://t3.ftcdn.net/jpg/02/37/39/84/360_F_237398455_v2MPf2R3cF8zEMNSAFhy0NO7M2SG6y6r.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(25px);
+    z-index: -1;
+}
+
+.blurred-blue, .blurred-orange, .blurred-red, .blurred-green, .blurred-tangerine {
     z-index: 1;
 }
