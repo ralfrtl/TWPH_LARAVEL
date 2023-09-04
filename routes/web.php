@@ -36,4 +36,3 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('login', [LoginController::class, 'showLoginForm']);
 Route::post('login', [LoginController::class, 'login'])->name('login');
-
