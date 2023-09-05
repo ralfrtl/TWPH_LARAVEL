@@ -13,41 +13,26 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'users';
 
-    protected $softDelete = true;
+    protected  $primaryKey = 'id';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'email',
         'user_level',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
+        'id',
         'password',
         'remember_token',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',

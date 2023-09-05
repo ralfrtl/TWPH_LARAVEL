@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                @foreach($employee as $user)
                     <tr class="py-3" style="cursor: pointer" onclick="window.location='{{ route('user.show', ['id' => $user->id]) }}'">
                         <td class="col-2 align-middle text-center px-4">
                                 {{$user->id}}
@@ -58,5 +58,8 @@
             </table>
         </div>
     </div>
+<div class="d-flex justify-content-center m-5">
+    {{ $employee->links() }}
+</div>
 @endsection
 

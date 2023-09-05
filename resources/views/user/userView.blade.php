@@ -34,13 +34,13 @@
                         User level: {{ $user->user_level }}
                     </p>
                     <p class="m-1">
-                        Birthday: {{ $user->date_of_birth }}
+                        Birthday: {{ $user->birthday_readable }}
                     </p>
                     <p class="m-1">
                         Age: {{ $user->age }}
                     </p>
                     <p class="m-1">
-                        Salary: {{env('LOCAL_CURRENCY')}} {{ number_format($user->salary) }}
+                        Salary: {{ $user->salary_local }}
                     </p>
                     <p class="m-1 mt-4">
                         Created at: {{ $user->created_at }}

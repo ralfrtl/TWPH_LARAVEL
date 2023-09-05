@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = Employee::all();
-        return view('user/userList', compact('users'));
+        $employee = Employee::paginate(10);
+        return view('user/userList', compact('employee'));
     }
 
     /**
@@ -57,14 +57,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::where('users.id', $id)
-            ->join('employee', 'users.id', '=', 'employee.id')
-            ->get(['users.*', 'employee.*'])
+        $user = Employee::where('users.id', $id)
+            ->join('users', 'users.id', '=', 'employee.id')
             ->first();
-        if (!empty($user)) {
-            $user['age'] = Carbon::parse($user->date_of_birth)->age;
-            $user['date_of_birth'] = Carbon::create($user->date_of_birth)->toFormattedDateString();
-        }
         return view('user/userView' , compact('user'));
     }
 
@@ -113,8 +108,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        dd(User::find($id));
-//        Employee::find($id)->delete();
+        User::find($id)->delete();
+        Employee::find($id)->delete();
         return redirect()->route('user.index');
     }
 }
