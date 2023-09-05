@@ -16,10 +16,15 @@ class MustAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $level = Auth::user()->user_level ?? 0;
-        if ($level >= 1 and $level <= 4) {
-            return $next($request);
+        if (Auth::check()) {
+            $level = Auth::user()->user_level ?? 0;
+            if ($level >= 1 and $level <= 4) {
+                return $next($request);
+            } else {
+                return redirect()->route('home');
+            }
         }
-        return back()->withInput();
+
+        return redirect()->route('longin.index');
     }
 }

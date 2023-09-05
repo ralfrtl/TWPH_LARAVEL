@@ -34,5 +34,5 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::get('login', [LoginController::class, 'showLoginForm']);
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.index');
 Route::post('login', [LoginController::class, 'login'])->name('login');
