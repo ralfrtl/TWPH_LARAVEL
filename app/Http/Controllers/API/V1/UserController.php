@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth:api', 'api_must_admin'], ['except' => ['index', 'show']]);
-    }
-
     public function index()
     {
         $employee = Employee::all();
@@ -80,7 +75,7 @@ class UserController extends Controller
         }
     }
 
-    public function destroy_force($id)
+    public function destroyForce($id)
     {
         $user = User::find($id);
         $employee = Employee::find($id);

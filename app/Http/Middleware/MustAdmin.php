@@ -16,15 +16,17 @@ class MustAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            $level = Auth::user()->user_level ?? 0;
+        if (auth()->check()) {
+            $level = auth()->user()->user_level ?? 0;
             if ($level >= 1 and $level <= 4) {
                 return $next($request);
-            } else {
-                return redirect()->route('home');
             }
         }
 
-        return redirect()->route('login.index');
+        if ($request->route()->getPrefix() === 'api') {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        } else {
+            return redirect()->route('home');
+        }
     }
 }
