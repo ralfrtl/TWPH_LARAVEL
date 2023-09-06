@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
         return view('home');
     })->name('home');
 
-    Route::group(['middleware' => ['must_admin']], function () {
+    Route::group(['middleware' => ['must_admin']], function ($router) {
         Route::get('user/', [UserController::class, 'index'])->name('user.index');
         Route::get('user/create', [UserController::class, 'create'])->name('user.create');
         Route::get('user/{id}', [UserController::class, 'show'])->name('user.show');

@@ -25,6 +25,6 @@ class MustAdmin
             }
         }
 
-        return redirect()->route('longin.index');
+        return redirect()->route('login.index');
     }
 }

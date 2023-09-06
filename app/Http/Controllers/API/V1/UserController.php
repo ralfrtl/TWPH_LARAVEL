@@ -9,35 +9,29 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class HelloWorldAPIController extends Controller
+class UserController extends Controller
 {
-    public function index($id = null)
+    public function __construct()
     {
-        if (empty($id)) {
-            $employee = Employee::all();
-            if ($employee)
-                return response()->json([
-                    'code' => 200,
-                    'data' => $employee
-                ]);
-            else
-                return response()->json([
-                    'code' => 404,
-                    'message' => 'No records found'
-                ]);
-        } else {
-            $employee = Employee::find($id);
-            if ($employee)
-                return response()->json([
-                    'code' => 200,
-                    'data' => $employee
-                ]);
-            else
-                return response()->json([
-                    'code' => 404,
-                    'message' => 'Record with id \'' . $id . '\' not found'
-                ]);
-        }
+        $this->middleware(['auth:api', 'api_must_admin'], ['except' => ['index', 'show']]);
+    }
+
+    public function index()
+    {
+        $employee = Employee::all();
+        if ($employee)
+            return response()->json($employee, 200);
+        else
+            return response()->json(['message' => 'No records found'], 404);
+    }
+
+    public function show($id)
+    {
+        $employee = Employee::find($id);
+        if ($employee)
+            return response()->json($employee, 200);
+        else
+            return response()->json(['message' => 'Record with id \'' . $id . '\' not found'], 404);
     }
 
     public function store(UserRequest $request)
@@ -105,4 +99,11 @@ class HelloWorldAPIController extends Controller
             ]);
         }
     }
+
+    public function isAdmin()
+    {
+        $level = auth()->user()->user_level;
+        return $level >= 1 and $level <= 4;
+    }
+
 }
