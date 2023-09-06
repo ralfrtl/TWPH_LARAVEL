@@ -23,16 +23,12 @@ class JwtAuthController extends Controller
 
     public function me()
     {
-        if (auth()->user()->user_level != 1) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
         return response()->json(auth()->user());
     }
 
     public function logout()
     {
         auth()->logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -47,6 +43,6 @@ class JwtAuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() . ' seconds'
-        ]);
+        ], 200);
     }
 }
