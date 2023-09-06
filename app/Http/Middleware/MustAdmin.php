@@ -22,8 +22,7 @@ class MustAdmin
                 return $next($request);
             }
         }
-
-        if ($request->route()->getPrefix() === 'api') {
+        if ($request->is('api/*')) {
             return response()->json(['error' => 'Unauthorized'], 401);
         } else {
             return redirect()->route('home');

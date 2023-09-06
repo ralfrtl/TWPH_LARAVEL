@@ -12,6 +12,10 @@ cp .env.example .env
 ```
 composer install
 ```
+or
+```
+composer update
+```
 
 # Node
 ```
@@ -27,6 +31,9 @@ php artisan db:seed --class=<Seeder>
 ```
 ```
 php artisan key:generate
+```
+```
+php artisan jwt:secret
 ```
 
 # Start Project

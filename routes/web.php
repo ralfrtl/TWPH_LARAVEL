@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['login' => false, 'user/create' => false]);
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
