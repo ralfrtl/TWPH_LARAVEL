@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'email' => 'rafie.luartes.twph@gmail.com',
+            'mail' => 'rafie.luartes.twph@gmail.com',
             'user_level' => '1',
             'password' => Hash::make('asdf1234')
         ]);
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'email' => 'songjane@exmail.co',
+            'mail' => 'songjane@exmail.co',
             'user_level' => '3',
             'password' => Hash::make('sin6in6i$myTaLent')
         ]);
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'email' => 'vincevice@exmail.co',
+            'mail' => 'vincevice@exmail.co',
             'user_level' => '4',
             'password' => Hash::make('vinc3v1c3$')
         ]);
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'email' => 'ald_rech@exmail.co',
+            'mail' => 'ald_rech@exmail.co',
             'user_level' => '5',
             'password' => Hash::make('StackLangNangStack!_000')
         ]);
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'email' => '25ccc@exmail.co',
+            'mail' => '25ccc@exmail.co',
             'user_level' => '6',
             'password' => Hash::make('DrakeIsBetterThanMe_100')
         ]);

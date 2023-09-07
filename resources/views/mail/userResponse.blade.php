@@ -18,12 +18,17 @@
 </head>
 <body>
 
-<div class="card my-5 p-5 w-75 mx-auto shadow-lg blurred-orange">
+<div class="card my-5 p-5 w-75 mx-auto shadow-lg blurred-orange text-center">
     <div class="card-title h3">
-        Hello Friend
+        Hello {{ $data['full_name'] ?? '' }}
     </div>
     <div class="card-body h5">
-        Message: {{ $data['text'] ?? 'hello' }}
+        We successfully receive your message.
+        <br>
+        <br>
+        Message:
+        <br>
+        {{ $data['text'] ?? '' }}
     </div>
 </div>
 </body>

@@ -26,6 +26,9 @@
             <a class="nav-link px-2" href="{{ route('user.index') }}">
                 {{ __('User List') }}
             </a>
+            <a class="nav-link px-2" href="{{ route('about.index') }}">
+                {{ __('About') }}
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

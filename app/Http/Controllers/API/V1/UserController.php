@@ -32,7 +32,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create([
-            'email' => $request->email,
+            'mail' => $request->email,
             'user_level' => $request->user_level,
             'password' => Hash::make($request->password),
         ]);

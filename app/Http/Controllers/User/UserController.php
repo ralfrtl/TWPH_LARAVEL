@@ -33,7 +33,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = User::create([
-            'email' => $request->email,
+            'mail' => $request->email,
             'user_level' => $request->user_level,
             'password' => Hash::make($request->password),
         ]);
@@ -71,7 +71,7 @@ class UserController extends Controller
         $employee = Employee::find($id);
         return view('user.register')
             ->with('id', $id)
-            ->with('email', $user->email)
+            ->with('mail', $user->email)
             ->with('user_level', $user->user_level)
             ->with('first_name', $employee->first_name)
             ->with('middle_name', $employee->middle_name)

@@ -13,7 +13,7 @@ class JwtAuthController extends Controller
 
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['mail', 'password']);
         $token = auth()->guard('api')->attempt($credentials);
         if (!$token) {
             return response()->json(['error' => 'Unauthorized'], 401);

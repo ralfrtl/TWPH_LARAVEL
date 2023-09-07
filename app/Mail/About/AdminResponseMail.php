@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\About;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TestMail extends Mailable
+class AdminResponseMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +26,7 @@ class TestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Test Mail',
+            subject: 'Message from' . $this->data['email'],
         );
     }
 
@@ -37,7 +36,7 @@ class TestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.test',
+            view: 'mail.adminResponse',
             with: [
                 'data' => $this->data
             ]
