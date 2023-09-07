@@ -4,9 +4,12 @@ namespace App\Http\Controllers\About;
 
 use App\Http\Controllers\Controller;
 use App\Mail\About\AdminResponseMail;
-use App\Mail\About\UserResponseMail;
+use App\Mail\About\ContactUsResponseMail;
+use App\Models\User;
+use App\Notifications\ContactUsNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class AboutController extends Controller
 {
@@ -22,11 +25,17 @@ class AboutController extends Controller
         $data['text'] = $request->form_message;
         $data['email'] = $request->email;
 
-        Mail::to($data['email'])
-            ->send(new UserResponseMail($data));
+        $user = User::where('email', $request->email)->first();
 
-        Mail::to('admin@twph.com')
-            ->send(new AdminResponseMail($data));
+
+
+        Notification::send($user, new ContactUsNotification($data));
+
+//        Mail::to($data['email'])
+//            ->send(new ContactUsResponseMail($data, 'User'));
+
+//        Mail::to('admin@twph.com')
+//            ->send(new ContactUsResponseMail($data, 'Admin'));
 
         return view('about.index')
             ->with('message', 'Message sent.');

@@ -23,12 +23,12 @@
         Hello {{ $data['full_name'] ?? '' }}
     </div>
     <div class="card-body h5">
-        We successfully receive your message.
-        <br>
-        <br>
-        Message:
-        <br>
         {{ $data['text'] ?? '' }}
+    </div>
+    <div class="card-body h5">
+        Love lots,
+        <br>
+        TWPH family
     </div>
 </div>
 </body>

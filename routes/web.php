@@ -3,7 +3,10 @@
 use App\Http\Controllers\About\AboutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\UserController;
+use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('send_test_email_view/', function () {
-    return view('mail.userResponse');
+Route::get('send_test_email', function () {
+    dispatch(new \App\Jobs\TestJob());
+    dd('mails sent');
 });
 
 Auth::routes(['login' => false, 'user/create' => false]);
