@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -17,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $employee = Employee::paginate(10);
-        return view('user/userList', compact('employee'));
+        return view('user.index', compact('employee'));
     }
 
     /**
@@ -25,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user/userRegister');
+        return view('user.register');
     }
 
     /**
@@ -60,7 +59,7 @@ class UserController extends Controller
         $user = Employee::where('users.id', $id)
             ->join('users', 'users.id', '=', 'employee.id')
             ->first();
-        return view('user/userView' , compact('user'));
+        return view('user.show' , compact('user'));
     }
 
     /**
@@ -70,7 +69,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $employee = Employee::find($id);
-        return view('user/userRegister')
+        return view('user.register')
             ->with('id', $id)
             ->with('email', $user->email)
             ->with('user_level', $user->user_level)
