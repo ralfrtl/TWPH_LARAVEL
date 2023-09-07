@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserController;
+use App\Mail\TestMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('send_test_email_view/', function () {
+    return view('email.test');
+});
+
+Route::get('send_test_email/', function () {
+    $data['text'] = "We are learning Laravel Emails!";
+    $data['email'] = "rafie.luartes.twph@gmail.com";
+
+    Mail::to($data['email'])
+        ->send(new TestMail($data));
+});
+
 Auth::routes(['login' => false, 'user/create' => false]);
 
 Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
+
 
     Route::group(['middleware' => ['must_admin']], function ($router) {
         Route::get('user/', [UserController::class, 'index'])->name('user.index');
