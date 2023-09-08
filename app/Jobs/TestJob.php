@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use NumberFormatter;
 
 class TestJob implements ShouldQueue
 {
@@ -30,18 +31,29 @@ class TestJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $users = Employee::whereMonth('employee.date_of_birth', Carbon::now()->format('m'))
+        $employees = Employee::whereMonth('employee.date_of_birth', Carbon::now()->format('m'))
             ->whereDay('employee.date_of_birth', Carbon::now()->format('d'))
-            ->join('users', 'users.id', '=', 'employee.id')
             ->get();
 
-        foreach ($users as $user) {
-            $this->data['full_name'] = $user->first_name;
-            $this->data['text'] = 'We wish you a happy ' . $user->age .' birthday!';
-            $this->data['email'] = $user->email;
+        foreach ($employees as $employee) {
+            $this->data['full_name'] = $employee->first_name;
+            $this->data['text'] = 'We wish you a happy ' . $this->addOrdinalNumberSuffix($employee->age) .' birthday!';
+            $this->data['email'] = $employee->user->email;
 
             Mail::to($this->data['email'])
                 ->send(new ContactUsResponseMail($this->data, 'User'));
         }
+    }
+
+    private function addOrdinalNumberSuffix($num) :string
+    {
+        if (!in_array(($num % 100),array(11,12,13))){
+            switch ($num % 10) {
+                case 1:  return $num.'st';
+                case 2:  return $num.'nd';
+                case 3:  return $num.'rd';
+            }
+        }
+        return $num.'th';
     }
 }
