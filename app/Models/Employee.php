@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
@@ -49,5 +50,10 @@ class Employee extends Model
     public function getSalaryLocalAttribute()
     {
         return env('LOCAL_CURRENCY') . ' ' . $this->attributes['salary'];
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'id');
     }
 }
