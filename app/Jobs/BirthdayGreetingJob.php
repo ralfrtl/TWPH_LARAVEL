@@ -2,19 +2,17 @@
 
 namespace App\Jobs;
 
-use App\Mail\About\ContactUsResponseMail;
+use App\Mail\About\ResponseMail;
 use App\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use NumberFormatter;
 
-class TestJob implements ShouldQueue
+class BirthdayGreetingJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -36,22 +34,24 @@ class TestJob implements ShouldQueue
             ->get();
 
         foreach ($employees as $employee) {
-            $this->data['full_name'] = $employee->first_name;
-            $this->data['text'] = 'We wish you a happy ' . $this->addOrdinalNumberSuffix($employee->age) .' birthday!';
-            $this->data['email'] = $employee->user->email;
+            $data['header'] = 'Greetings ' . $employee->first_name;
+            $data['body'] = 'We wish you a happy ' . $this->addOrdinalNumberSuffix($employee->age) .' birthday!';
+            $data['footer'] = 'Love lots, Telework PH';
+            $data['email'] = $employee->user->email;
+            $data['subject'] = 'Happy birthday!';
 
-            Mail::to($this->data['email'])
-                ->send(new ContactUsResponseMail($this->data, 'User'));
+            Mail::to($data['email'])
+                ->send(new ResponseMail($data));
         }
     }
 
-    private function addOrdinalNumberSuffix($num) :string
+    private function addOrdinalNumberSuffix(int $num) :string
     {
-        if (!in_array(($num % 100),array(11,12,13))){
+        if (!in_array(($num % 100), array(11, 12, 13))) {
             switch ($num % 10) {
-                case 1:  return $num.'st';
-                case 2:  return $num.'nd';
-                case 3:  return $num.'rd';
+                case 1: return $num.'st';
+                case 2: return $num.'nd';
+                case 3: return $num.'rd';
             }
         }
         return $num.'th';

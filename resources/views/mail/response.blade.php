@@ -18,17 +18,15 @@
 </head>
 <body>
 
-<div class="card my-5 p-5 w-75 mx-auto shadow-lg blurred-orange text-center">
+<div class="card my-5 py-5 px-1 mx-auto shadow-lg blurred-orange text-center" style="width: 500px; max-width: 100%;">
     <div class="card-title h3">
-        Hello {{ $data['full_name'] ?? '' }}
+        {{ $data['header'] ?? '' }}
     </div>
     <div class="card-body h5">
-        {{ $data['text'] ?? '' }}
+        {{ $data['body'] ?? '' }}
     </div>
     <div class="card-body h5">
-        Love lots,
-        <br>
-        TWPH family
+        {{ $data['footer'] ?? '' }}
     </div>
 </div>
 </body>

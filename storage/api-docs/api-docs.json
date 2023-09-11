@@ -1,0 +1,201 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "TWPH Portal API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate a user then returns a JWT token.",
+                "parameters": [
+                    {
+                        "name": "mail",
+                        "in": "query",
+                        "description": "Registered User's email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Registered User's password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "180 random character string",
+                                            "type": "string"
+                                        },
+                                        "user_level": {
+                                            "description": "1-6",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        },
+        "/api/auth/v1/auth/me": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "A user must be logged-in to use this endpoint.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "description": "Email of the logged-in user",
+                                            "type": "string"
+                                        },
+                                        "user_level": {
+                                            "description": "1-6",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Validation errors"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/v1/auth/logout": {
+            "post": {
+                "summary": "Logouts a currently logged-in user.",
+                "responses": {
+                    "200": {
+                        "description": "Success."
+                    },
+                    "401": {
+                        "description": "Unauthorized, no logged-in user."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/v1/auth/refresh": {
+            "post": {
+                "summary": "Returns a new login token. User must be logged-in to use this.",
+                "responses": {
+                    "201": {
+                        "description": "returns [token = New JWT login token]"
+                    },
+                    "401": {
+                        "description": "Unauthorized, no logged-in user."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "required": [
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "email": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "readOnly": "true",
+                        "example": "user@gmail.com"
+                    },
+                    "user_level": {
+                        "description": "User role",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "email_verified_at": {
+                        "description": "Datetime marker of verification status",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": "true",
+                        "example": "2019-02-25 12:59:20"
+                    },
+                    "remember_token": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "deleted_at": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth related endpoints"
+        }
+    ]
+}

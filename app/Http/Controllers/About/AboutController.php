@@ -4,7 +4,7 @@ namespace App\Http\Controllers\About;
 
 use App\Http\Controllers\Controller;
 use App\Mail\About\AdminResponseMail;
-use App\Mail\About\ContactUsResponseMail;
+use App\Mail\About\ResponseMail;
 use App\Models\User;
 use App\Notifications\ContactUsNotification;
 use Illuminate\Http\Request;
@@ -21,21 +21,27 @@ class AboutController extends Controller
 
     public function send(Request $request)
     {
-        $data['full_name'] = $request->full_name;
-        $data['text'] = $request->form_message;
+        $data['header'] = 'Hello ' . $request->full_name;
+        $data['body'] = 'Thank you for reaching out. We have received your message. In the meantime, if you have any other questions or concerns, please don\'t hesitate to contact us.';
+        $data['footer'] = 'Sincerely, Telework PH';
         $data['email'] = $request->email;
+        $data['subject'] = 'Greetings';
 
-        $user = User::where('email', $request->email)->first();
+        Mail::to($data['email'])
+            ->send(new ResponseMail($data));
 
+        $data['header'] = $request->email;
+        $data['body'] = $request->full_name;
+        $data['footer'] = $request->form_message;
+        $data['email'] = 'admin@twph.com';
+        $data['subject'] = 'Message from: ' . $request->email;
 
+        Mail::to($data['email'])
+            ->send(new ResponseMail($data));
 
-        Notification::send($user, new ContactUsNotification($data));
-
-//        Mail::to($data['email'])
-//            ->send(new ContactUsResponseMail($data, 'User'));
-
-//        Mail::to('admin@twph.com')
-//            ->send(new ContactUsResponseMail($data, 'Admin'));
+//
+//        $user = User::where('email', $request->email)->first();
+//        Notification::send($user, new ContactUsNotification($data));
 
         return view('about.index')
             ->with('message', 'Message sent.');

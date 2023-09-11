@@ -3,9 +3,10 @@
 use App\Http\Controllers\About\AboutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\UserController;
-use App\Jobs\TestJob;
+use App\Jobs\BirthdayGreetingJob;
+use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +21,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('send_test_email_view', function () {
-    return view('mail.userResponse');
+    return view('mail.response');
 });
 
 Route::get('send_test_email', function () {
-    dispatch(new TestJob());
+    dispatch(new BirthdayGreetingJob());
     dd('mails sent');
 });
 
