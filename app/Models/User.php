@@ -11,6 +11,25 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @OA\Schema(
+ *      title="User",
+ *      description="Connects to users table",
+ *      @OA\Property(
+ *          property="id",
+ *          type="integer",
+ *          description="Unique, auto increment, Primary key",
+ *      ),
+ *      @OA\Property(
+ *          property="email",
+ *          type="string",
+ *          description="Unique",
+ *          example="sample@mail.com",
+ *          format="email",
+ *      )
+ * )
+*/
+
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;

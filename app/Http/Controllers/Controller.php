@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\Info(
- *    title="TWPH Portal API",
+ *    title="Employee Portal API",
  *    version="1.0.0",
  * )
  * @OA\SecurityScheme(

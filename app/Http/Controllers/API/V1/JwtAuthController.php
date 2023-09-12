@@ -25,7 +25,7 @@ use App\Http\Controllers\Controller;
 *       @OA\Schema(type="string")
 *   ),
 *   @OA\Response(
-*       response="200",
+*       response="201",
 *       description="Success",
 *       @OA\JsonContent(
 *           type="object",
