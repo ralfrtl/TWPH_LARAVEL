@@ -3,7 +3,7 @@
 @section('content')
 @if(session('message'))
     <div class="card fw-750 mx-auto shadow-lg">
-        <div class="card-body {{ session('message-class') }} text-white">
+        <div class="card-body {{ session('message-class') }}">
             <p class="text-center m-0">
                 {{ session('message') }}
             </p>
@@ -40,11 +40,13 @@
                                 <i class="bi bi-pencil-square"></i>
                                 Edit
                             </a>
-                            <a class="btn btn-sm btn-outline-danger rounded-5" href="{{ route('user.destroy', ['id' => $user->id]) }}"
-                                onclick="showConfirmDialog(event)">
-                                <i class="bi bi-person-dash"></i>
-                                Delete
-                            </a>
+                            @if($user->id != Auth::user()->id)
+                                <a class="btn btn-sm btn-outline-danger rounded-5" href="{{ route('user.destroy', ['id' => $user->id]) }}"
+                                    onclick="showConfirmDialog(event)">
+                                    <i class="bi bi-person-dash"></i>
+                                    Delete
+                                </a>
+                            @endif
                             <script>
                                 function showConfirmDialog(e){
                                     e.stopPropagation()

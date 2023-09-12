@@ -36,7 +36,7 @@ class BirthdayGreetingJob implements ShouldQueue
         foreach ($employees as $employee) {
             $data['header'] = 'Greetings ' . $employee->first_name;
             $data['body'] = 'We wish you a happy ' . $this->addOrdinalNumberSuffix($employee->age) .' birthday!';
-            $data['footer'] = 'Love lots, Telework PH';
+            $data['footer'] = 'Love lots, THE Company';
             $data['email'] = $employee->user->email;
             $data['subject'] = 'Happy birthday!';
 

@@ -18,14 +18,16 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm blurred-orange">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
-            <a class="nav-link px-2" href="{{ route('user.index') }}">
-                {{ __('User List') }}
-            </a>
+            @if(Auth::user()->isAdmin)
+                <a class="nav-link px-2" href="{{ route('user.index') }}">
+                    {{ __('User List') }}
+                </a>
+            @endif
             <a class="nav-link px-2" href="{{ route('about.index') }}">
                 {{ __('About') }}
             </a>
@@ -61,7 +63,7 @@
                             @if (Route::has('register'))
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{Auth::user()->name}} - {{ Auth::user()->email }}
+                                    {{Auth::user()->employee->first_name}} {{Auth::user()->employee->middle_name}} {{Auth::user()->employee->last_name}} - <strong>{{ Auth::user()->email }}</strong>
                                 </a>
                             @endif
 

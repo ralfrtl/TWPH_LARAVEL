@@ -5,11 +5,8 @@ namespace App\Http\Controllers\About;
 use App\Http\Controllers\Controller;
 use App\Mail\About\AdminResponseMail;
 use App\Mail\About\ResponseMail;
-use App\Models\User;
-use App\Notifications\ContactUsNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 
 class AboutController extends Controller
 {
@@ -23,7 +20,7 @@ class AboutController extends Controller
     {
         $data['header'] = 'Hello ' . $request->full_name;
         $data['body'] = 'Thank you for reaching out. We have received your message. In the meantime, if you have any other questions or concerns, please don\'t hesitate to contact us.';
-        $data['footer'] = 'Sincerely, Telework PH';
+        $data['footer'] = 'Sincerely, THE Company';
         $data['email'] = $request->email;
         $data['subject'] = 'Greetings';
 
@@ -33,13 +30,12 @@ class AboutController extends Controller
         $data['header'] = $request->email;
         $data['body'] = $request->full_name;
         $data['footer'] = $request->form_message;
-        $data['email'] = 'admin@twph.com';
+        $data['email'] = 'admin@THECompany.com';
         $data['subject'] = 'Message from: ' . $request->email;
 
         Mail::to($data['email'])
             ->send(new ResponseMail($data));
 
-//
 //        $user = User::where('email', $request->email)->first();
 //        Notification::send($user, new ContactUsNotification($data));
 

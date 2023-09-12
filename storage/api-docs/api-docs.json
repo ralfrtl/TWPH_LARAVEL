@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/auth/v1/auth/login": {
+        "/api/v1/auth/login": {
             "post": {
                 "tags": [
                     "Auth"
@@ -13,7 +13,7 @@
                 "summary": "Authenticate a user then returns a JWT token.",
                 "parameters": [
                     {
-                        "name": "mail",
+                        "name": "email",
                         "in": "query",
                         "description": "Registered User's email",
                         "required": true,
@@ -38,13 +38,17 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "token": {
+                                        "access_token": {
                                             "description": "180 random character string",
                                             "type": "string"
                                         },
-                                        "user_level": {
-                                            "description": "1-6",
-                                            "type": "integer"
+                                        "token_type": {
+                                            "description": "Type of token",
+                                            "type": "string"
+                                        },
+                                        "expires_in": {
+                                            "description": "Duration of the generated token in seconds",
+                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -58,12 +62,12 @@
                 }
             }
         },
-        "/api/auth/v1/auth/me": {
+        "/api/v1/auth/me": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "A user must be logged-in to use this endpoint.",
+                "summary": "Returns the User's info.",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -96,8 +100,11 @@
                 ]
             }
         },
-        "/api/auth/v1/auth/logout": {
+        "/api/v1/auth/logout": {
             "post": {
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Logouts a currently logged-in user.",
                 "responses": {
                     "200": {
@@ -114,8 +121,11 @@
                 ]
             }
         },
-        "/api/auth/v1/auth/refresh": {
+        "/api/v1/auth/refresh": {
             "post": {
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Returns a new login token. User must be logged-in to use this.",
                 "responses": {
                     "201": {
@@ -134,56 +144,6 @@
         }
     },
     "components": {
-        "schemas": {
-            "User": {
-                "required": [
-                    "password"
-                ],
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "readOnly": "true",
-                        "example": "1"
-                    },
-                    "email": {
-                        "description": "User unique email address",
-                        "type": "string",
-                        "format": "email",
-                        "readOnly": "true",
-                        "example": "user@gmail.com"
-                    },
-                    "user_level": {
-                        "description": "User role",
-                        "type": "integer",
-                        "readOnly": "true",
-                        "example": "1"
-                    },
-                    "email_verified_at": {
-                        "description": "Datetime marker of verification status",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": "true",
-                        "example": "2019-02-25 12:59:20"
-                    },
-                    "remember_token": {
-                        "type": "string"
-                    },
-                    "created_at": {
-                        "type": "string"
-                    },
-                    "updated_at": {
-                        "type": "string"
-                    },
-                    "deleted_at": {
-                        "type": "string"
-                    }
-                },
-                "type": "object",
-                "xml": {
-                    "name": "User"
-                }
-            }
-        },
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",

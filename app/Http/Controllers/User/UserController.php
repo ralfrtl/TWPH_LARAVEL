@@ -33,7 +33,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = User::create([
-            'mail' => $request->email,
+            'email' => $request->email,
             'user_level' => $request->user_level,
             'password' => Hash::make($request->password),
         ]);
@@ -71,7 +71,7 @@ class UserController extends Controller
         $employee = Employee::find($id);
         return view('user.register')
             ->with('id', $id)
-            ->with('mail', $user->email)
+            ->with('email', $user->email)
             ->with('user_level', $user->user_level)
             ->with('first_name', $employee->first_name)
             ->with('middle_name', $employee->middle_name)
@@ -99,7 +99,7 @@ class UserController extends Controller
         $employee->save();
         return redirect()->route('user.index')
             ->with('message', 'User ID#' . $id . ' modified successfully.')
-            ->with('message-class', 'bg-gradient-success');
+            ->with('message-class', 'blurred-green');
     }
 
     /**
@@ -109,6 +109,8 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         Employee::find($id)->delete();
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')
+            ->with('message', 'User ID#' . $id . ' has been removed.')
+            ->with('message-class', 'blurred-tangerine');
     }
 }
