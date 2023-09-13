@@ -40,7 +40,7 @@ class BirthdayGreetingJob implements ShouldQueue
             $data['email'] = $employee->user->email;
             $data['subject'] = 'Happy birthday!';
 
-            Mail::to($data['email'])
+            Mail::to($employee->user->email)
                 ->send(new ResponseMail($data));
         }
     }

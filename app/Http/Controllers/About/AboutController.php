@@ -27,10 +27,10 @@ class AboutController extends Controller
         Mail::to($data['email'])
             ->send(new ResponseMail($data));
 
-        $data['header'] = $request->email;
-        $data['body'] = $request->full_name;
-        $data['footer'] = $request->form_message;
-        $data['email'] = 'admin@THECompany.com';
+        $data['header'] = 'Email: ' . $request->email;
+        $data['body'] = 'Name: ' . $request->full_name;
+        $data['footer'] = 'Message: ' . $request->form_message;
+        $data['email'] = 'aanyangnyangaa@gmail.com';
         $data['subject'] = 'Message from: ' . $request->email;
 
         Mail::to($data['email'])
@@ -39,7 +39,8 @@ class AboutController extends Controller
 //        $user = User::where('email', $request->email)->first();
 //        Notification::send($user, new ContactUsNotification($data));
 
-        return view('about.index')
-            ->with('message', 'Message sent.');
+        return redirect()->route('about.index')
+            ->with('message', 'Message sent.')
+            ->with('message-class', 'blurred-green');
     }
 }

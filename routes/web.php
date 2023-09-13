@@ -20,15 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('send_test_email_view', function () {
-    return view('mail.response');
-});
-
-Route::get('send_test_email', function () {
-    dispatch(new BirthdayGreetingJob());
-    dd('mails sent');
-});
-
 Auth::routes(['login' => false, 'user/create' => false]);
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
@@ -61,6 +52,27 @@ Route::group(['middleware' => ['auth:web']], function () {
             ->name('user.update');
         Route::get('user/delete/{id}', [UserController::class, 'destroy'])
             ->name('user.destroy');
+
+        Route::get('send_test_email_view', function () {
+            return view('mail.response');
+        });
+
+        Route::get('send_test_email', function () {
+            dispatch(new BirthdayGreetingJob());
+
+            $employees = Employee::whereMonth('employee.date_of_birth', Carbon::now()->format('m'))
+                ->whereDay('employee.date_of_birth', Carbon::now()->format('d'))
+                ->get();
+
+            foreach ($employees as $employee) {
+                echo 'email : ' . $employee->user->email;
+                echo '<br>';
+            }
+
+            echo Carbon::now();
+            echo '<br>';
+            echo 'job dispatched';
+        });
     });
 });
 
