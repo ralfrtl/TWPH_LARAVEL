@@ -20,6 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('apiDoc', function() {
+    return response()->file('app/Http/Controllers/API/V1/api.yaml');
+});
+
+Route::view('/swagger', 'swagger');
+
 Auth::routes(['login' => false, 'user/create' => false]);
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
